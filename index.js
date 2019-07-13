@@ -33,6 +33,11 @@ const credentials = require("./credentials");
     "https://panel.soclminer.com.br/app/f6ff038c-24ee-43d4-b624-7fd945bb6929"
   );
 
+  // go to manual campaign creation
+  await page.goto(
+    "https://panel.soclminer.com.br/campaign/push/Create?newcampaign=True&campaigntype=5"
+  );
+
   await page.screenshot({ path: "example.png" });
   // await browser.close();
 })();
