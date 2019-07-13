@@ -1,5 +1,8 @@
 const puppeteer = require("puppeteer");
 const credentials = require("./credentials");
+const fs = require("fs");
+const readline = require("readline");
+const { google } = require("googleapis");
 
 (async () => {
   // startup puppeteer
@@ -34,9 +37,31 @@ const credentials = require("./credentials");
   );
 
   // go to manual campaign creation
-  await page.goto(
+  page.goto(
     "https://panel.soclminer.com.br/campaign/push/Create?newcampaign=True&campaigntype=5"
   );
+
+  //await Promise.all([popup.waitForSelector("#email")]);
+  await page.waitForSelector("#btnTest");
+  await page.waitFor(2000);
+  await page.type("#AudienceId", "ab837adb-76e2-44ae-b981-31e56b35553d");
+  await page.waitForSelector("#linkRedirect");
+  await page.type("#linkRedirect", "http://uol.com.br");
+  await page.click("#scheduleCampaign");
+  await page.waitFor(2000);
+  await page.evaluate(
+    () => (document.querySelector("#campaignStartDate").value = "")
+  );
+  await page.type("#campaignStartDate", "25/07/2019 14:50");
+  await page.type("#campaignName", "campanhafeitapeloscript");
+  await page.click("#formattedLink");
+  await page.type("#title", "Título da campanha");
+  await page.type("#message", "Mensagem da campanha");
+  await page.click("#btnTest");
+  await page.waitFor(2000);
+  await page.click("#btnSave");
+  await page.waitFor(2000);
+  await page.click("#submitAutomaticPush");
 
   await page.screenshot({ path: "example.png" });
   // await browser.close();
