@@ -68,6 +68,7 @@ const campaigns = [
     await page.click("#btnSave");
     await page.waitFor(2000);
     await page.click("#submitAutomaticPush");
+    console.log(`Campanha '${campaigns[i].name}' criada!`);
   }
 
   await page.screenshot({ path: "example.png" });
