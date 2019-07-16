@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const credentials = require("./credentials");
 
+// campaings array
 const campaigns = [
   {
     customer: "f6ff038c-24ee-43d4-b624-7fd945bb6929",
