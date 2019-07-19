@@ -18,6 +18,10 @@ async function init() {
   console.log("");
   rl.question("-> ", answer => {
     if (answer == "1" || answer == "2") {
+      console.clear();
+      console.log("");
+      console.log("-> Aperte os cintos! Aqui vamos nós! <-");
+      console.log("");
       (async () => {
         // start puppeteer
         const browser = await puppeteer.launch({ headless: false });

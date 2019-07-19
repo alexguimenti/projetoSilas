@@ -28,6 +28,9 @@ CreateCampaignController = {
       await page.evaluate(
         () => (document.querySelector("#campaignStartDate").value = "")
       );
+      if (campaigns[i].image == "sim") {
+        await page.click("#campaignImage");
+      }
       await page.type("#campaignStartDate", campaigns[i].start);
       await page.type("#campaignName", campaigns[i].name);
       await page.type("#title", campaigns[i].title);
@@ -36,6 +39,7 @@ CreateCampaignController = {
       await page.waitFor(2000);
       await page.click("#btnSave");
       await page.waitFor(2000);
+      await page.waitForSelector("#submitAutomaticPush");
       await page.click("#submitAutomaticPush");
       console.log(
         `Campanha '${campaigns[i].name}' criada! ${i +
