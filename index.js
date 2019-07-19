@@ -12,7 +12,7 @@ init();
 
 async function init() {
   console.log("");
-  console.log("[1] - Campanhas Manuais");
+  console.log("[1] - Campanhas Manuais Programadas");
   console.log("[2] - Optins");
   console.log("[Exit] - Encerrar programa");
   console.log("");
@@ -28,7 +28,7 @@ async function init() {
         // wait panel to load
         await page.waitFor("#bt-menu");
 
-        optionCheck(answer, browser);
+        optionCheck(answer, browser, page);
       })();
     } else if (answer == "exit" || answer == "Exit") {
       process.exit();
@@ -42,11 +42,18 @@ async function init() {
 }
 
 //const types = ["campanhas", "onsites", "bounces", "optins"]
-async function optionCheck(option, browser) {
+async function optionCheck(option, browser, page) {
   if (option == "1") {
     await CreateCampaignController.campaignCreator(page);
   } else {
     console.log("Script ainda não disponível!");
     await browser.close();
   }
+  console.log("");
+  console.log("Upload concluído!");
+  console.log("");
+  await page.waitFor("#bt-menu");
+  await page.waitFor(4000);
+  await browser.close();
+  process.exit();
 }

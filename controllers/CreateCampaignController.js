@@ -2,6 +2,11 @@ const campaigns = require("./campaigns");
 
 CreateCampaignController = {
   campaignCreator: async function createCampaigns(page, i) {
+    console.log("");
+    console.log("======================================");
+    console.log("   Upload de campanhas inicialiado!   ");
+    console.log("======================================");
+    console.log("");
     for (let i = 0; i < campaigns.length; i++) {
       await page.goto(
         `https://panel.soclminer.com.br/app/${campaigns[i].customer}`,
@@ -32,7 +37,10 @@ CreateCampaignController = {
       await page.click("#btnSave");
       await page.waitFor(2000);
       await page.click("#submitAutomaticPush");
-      console.log(`Campanha '${campaigns[i].name}' criada!`);
+      console.log(
+        `Campanha '${campaigns[i].name}' criada! ${i +
+          1} Done! ${campaigns.length - (i + 1)} Left!`
+      );
     }
   }
 };
