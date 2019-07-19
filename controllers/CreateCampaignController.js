@@ -3,10 +3,14 @@ const campaigns = require("./campaigns");
 CreateCampaignController = {
   campaignCreator: async function createCampaigns(page, i) {
     for (let i = 0; i < campaigns.length; i++) {
-      await page.goto(`https://panel.soclminer.com.br/app/${campaigns[i].customer}`);
+      await page.goto(
+        `https://panel.soclminer.com.br/app/${campaigns[i].customer}`,
+        { waitUntil: "load", timeout: 0 }
+      );
       // go to manual campaign creation
       page.goto(
-        "https://panel.soclminer.com.br/campaign/push/Create?newcampaign=True&campaigntype=5"
+        "https://panel.soclminer.com.br/campaign/push/Create?newcampaign=True&campaigntype=5",
+        { waitUntil: "load", timeout: 0 }
       );
 
       await page.waitForSelector("#btnTest");
@@ -31,6 +35,6 @@ CreateCampaignController = {
       console.log(`Campanha '${campaigns[i].name}' criada!`);
     }
   }
-}
+};
 
 module.exports = CreateCampaignController;
