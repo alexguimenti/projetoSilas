@@ -21,9 +21,9 @@ async function init() {
     if (answer1 == "1" || answer1 == "2") {
       rl.question("Quantas campanhas? ", answer2 => {
         const amount = answer2;
-        console.log(answer2);
+        console.log(amount);
         if (answer1 == "1" || answer1 == "2") {
-          console.clear();
+          //console.clear();
           console.log("");
           console.log("-> Aperte os cintos! Aqui vamos nós! <-");
           console.log("");
@@ -37,7 +37,7 @@ async function init() {
             // wait panel to load
             await page.waitFor("#bt-menu");
 
-            optionCheck(answer1, browser, page);
+            optionCheck(answer1, browser, page, amount);
           })();
         }
       });
@@ -53,9 +53,9 @@ async function init() {
 }
 
 //const types = ["campanhas", "onsites", "bounces", "optins"]
-async function optionCheck(option, browser, page) {
+async function optionCheck(option, browser, page, amount) {
   if (option == "1") {
-    await CreateCampaignController.campaignCreator(page);
+    await CreateCampaignController.campaignCreator(page, amount);
   } else {
     console.log("Script ainda não disponível!");
     await browser.close();

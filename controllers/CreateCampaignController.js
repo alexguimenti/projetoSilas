@@ -2,13 +2,13 @@
 const GoogleSheetsController = require("./GoogleSheetsController");
 
 CreateCampaignController = {
-  campaignCreator: async function createCampaigns(page, i) {
+  campaignCreator: async function createCampaigns(page, amount) {
     console.log("");
     console.log("======================================");
     console.log("   Upload de campanhas inicialiado!   ");
     console.log("======================================");
     console.log("");
-    const campaigns = await GoogleSheetsController.getCampaings();
+    const campaigns = await GoogleSheetsController.getCampaings(amount);
     for (let i = 0; i < campaigns.length; i++) {
       await page.goto(
         `https://panel.soclminer.com.br/app/${campaigns[i].customer}`,
