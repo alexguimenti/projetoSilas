@@ -16,31 +16,37 @@ async function init() {
   console.log("[2] - Optins");
   console.log("[Exit] - Encerrar programa");
   console.log("");
+
   rl.question("-> ", answer => {
     if (answer == "1" || answer == "2") {
-      console.clear();
-      console.log("");
-      console.log("-> Aperte os cintos! Aqui vamos nós! <-");
-      console.log("");
-      (async () => {
-        // start puppeteer
-        const browser = await puppeteer.launch({ headless: false });
-        const page = await browser.newPage();
-        // go to panel
-        await page.goto("https://panel.soclminer.com.br");
-        await FacebookLoginController.facebookLogin(browser, page);
-        // wait panel to load
-        await page.waitFor("#bt-menu");
+      rl.question("Quantas campanhas? ", answer => {
+        const amount = answer;
+        if (answer == "1" || answer == "2") {
+          console.clear();
+          console.log("");
+          console.log("-> Aperte os cintos! Aqui vamos nós! <-");
+          console.log("");
+          (async () => {
+            // start puppeteer
+            const browser = await puppeteer.launch({ headless: false });
+            const page = await browser.newPage();
+            // go to panel
+            await page.goto("https://panel.soclminer.com.br");
+            await FacebookLoginController.facebookLogin(browser, page);
+            // wait panel to load
+            await page.waitFor("#bt-menu");
 
-        optionCheck(answer, browser, page);
-      })();
-    } else if (answer == "exit" || answer == "Exit") {
-      process.exit();
-    } else {
-      console.log("");
-      console.log("Opção Inválida! Tente de novo...");
-      console.log("");
-      init();
+            optionCheck(answer, browser, page);
+          })();
+        } else if (answer == "exit" || answer == "Exit") {
+          process.exit();
+        } else {
+          console.log("");
+          console.log("Opção Inválida! Tente de novo...");
+          console.log("");
+          init();
+        }
+      });
     }
   });
 }
@@ -58,6 +64,6 @@ async function optionCheck(option, browser, page) {
   console.log("");
   await page.waitFor("#bt-menu");
   await page.waitFor(4000);
-  await browser.close();
-  process.exit();
+  //await browser.close();
+  // process.exit();
 }

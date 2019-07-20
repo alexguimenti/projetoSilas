@@ -1,4 +1,5 @@
-const campaigns = require("./campaigns");
+//const campaigns = require("./campaigns");
+const GoogleSheetsController = require("./GoogleSheetsController");
 
 CreateCampaignController = {
   campaignCreator: async function createCampaigns(page, i) {
@@ -7,6 +8,7 @@ CreateCampaignController = {
     console.log("   Upload de campanhas inicialiado!   ");
     console.log("======================================");
     console.log("");
+    const campaigns = await GoogleSheetsController.getCampaings();
     for (let i = 0; i < campaigns.length; i++) {
       await page.goto(
         `https://panel.soclminer.com.br/app/${campaigns[i].customer}`,
@@ -17,7 +19,6 @@ CreateCampaignController = {
         "https://panel.soclminer.com.br/campaign/push/Create?newcampaign=True&campaigntype=5",
         { waitUntil: "load", timeout: 0 }
       );
-
       await page.waitForSelector("#btnTest");
       await page.waitFor(2000);
       await page.type("#AudienceId", campaigns[i].audience);
