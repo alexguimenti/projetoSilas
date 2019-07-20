@@ -17,11 +17,12 @@ async function init() {
   console.log("[Exit] - Encerrar programa");
   console.log("");
 
-  rl.question("-> ", answer => {
-    if (answer == "1" || answer == "2") {
-      rl.question("Quantas campanhas? ", answer => {
-        const amount = answer;
-        if (answer == "1" || answer == "2") {
+  rl.question("-> ", answer1 => {
+    if (answer1 == "1" || answer1 == "2") {
+      rl.question("Quantas campanhas? ", answer2 => {
+        const amount = answer2;
+        console.log(answer2);
+        if (answer1 == "1" || answer1 == "2") {
           console.clear();
           console.log("");
           console.log("-> Aperte os cintos! Aqui vamos nós! <-");
@@ -36,17 +37,17 @@ async function init() {
             // wait panel to load
             await page.waitFor("#bt-menu");
 
-            optionCheck(answer, browser, page);
+            optionCheck(answer1, browser, page);
           })();
-        } else if (answer == "exit" || answer == "Exit") {
-          process.exit();
-        } else {
-          console.log("");
-          console.log("Opção Inválida! Tente de novo...");
-          console.log("");
-          init();
         }
       });
+    } else if (answer1 == "exit" || answer1 == "Exit") {
+      process.exit();
+    } else {
+      console.log("");
+      console.log("Opção Inválida! Tente de novo...");
+      console.log("");
+      init();
     }
   });
 }
