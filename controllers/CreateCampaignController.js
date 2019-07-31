@@ -5,7 +5,7 @@ CreateCampaignController = {
   campaignCreator: async function createCampaigns(page, amount) {
     console.log("");
     console.log("======================================");
-    console.log("   Upload de campanhas inicialiado!   ");
+    console.log("   Upload de campanhas inicializado!   ");
     console.log("======================================");
     console.log("");
     const campaigns = await GoogleSheetsController.getCampaings(amount);
@@ -21,7 +21,6 @@ CreateCampaignController = {
       );
       await page.waitForSelector("#btnTest");
       await page.waitFor(2000);
-      await page.type("#AudienceId", campaigns[i].audience);
       await page.waitForSelector("#linkRedirect");
       await page.type("#linkRedirect", campaigns[i].link);
       await page.click("#scheduleCampaign");
@@ -36,16 +35,19 @@ CreateCampaignController = {
       await page.type("#campaignName", campaigns[i].name);
       await page.type("#title", campaigns[i].title);
       await page.type("#message", campaigns[i].message);
+      await page.waitFor(1000);
+      await page.click("#AudienceId");
+      await page.select("#AudienceId", campaigns[i].audience);
+      await page.waitFor(2000);
       await page.click("#btnTest");
       await page.waitFor(2000);
       await page.click("#btnSave");
       await page.waitFor(2000);
       await page.waitForSelector("#submitAutomaticPush");
       await page.click("#submitAutomaticPush");
-      console.log(
-        `Campanha '${campaigns[i].name}' criada! ${i +
-          1} Done! ${campaigns.length - (i + 1)} Left!`
-      );
+      console.log(`Campanha '${campaigns[i].name}' concluída!`);
+      console.log(`${i + 1} de ${campaigns.length} Feito`);
+      console.log("");
     }
   }
 };

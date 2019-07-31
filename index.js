@@ -23,9 +23,8 @@ async function init() {
         const amount = answer2;
         console.log(amount);
         if (answer1 == "1" || answer1 == "2") {
-          //console.clear();
+          console.clear();
           console.log("");
-          console.log("-> Aperte os cintos! Aqui vamos nós! <-");
           console.log("");
           (async () => {
             // start puppeteer

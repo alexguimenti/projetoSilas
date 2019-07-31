@@ -10,12 +10,12 @@ GoogleSheetsController = {
     );
     await promisify(doc.useServiceAccountAuth)(creds);
     const info = await promisify(doc.getInfo)();
-    const campaingsSheet = info.worksheets[1];
+    const campaingsSheet = info.worksheets[0];
     const cells = await promisify(campaingsSheet.getCells)({
       "min-row": 2,
       "max-row": 2 + (amount - 1),
-      "min-col": 13,
-      "max-col": 13
+      "min-col": 14,
+      "max-col": 14
     });
     for (const cell of cells) {
       let campaign = JSON.parse(cell.value);
