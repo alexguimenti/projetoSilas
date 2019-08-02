@@ -40,7 +40,8 @@ CreateCampaignController = {
       await page.select("#AudienceId", campaigns[i].audience);
       await page.waitFor(2000);
       await page.click("#btnTest");
-      await page.waitFor(2000);
+      await page.waitForSelector("#btnSave  ");
+      await page.waitFor(3000);
       await page.click("#btnSave");
       await page.waitFor(2000);
       await page.waitForSelector("#submitAutomaticPush");
