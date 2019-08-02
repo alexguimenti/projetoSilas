@@ -54,7 +54,7 @@ async function init() {
 //const types = ["campanhas", "onsites", "bounces", "optins"]
 async function optionCheck(option, browser, page, amount) {
   if (option == "1") {
-    await CreateCampaignController.campaignCreator(page, amount);
+    await CreateCampaignController.campaignCreator(page, amount, browser);
   } else {
     console.log("Script ainda não disponível!");
     await browser.close();

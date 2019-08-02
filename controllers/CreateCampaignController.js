@@ -2,11 +2,11 @@
 const GoogleSheetsController = require("./GoogleSheetsController");
 
 CreateCampaignController = {
-  campaignCreator: async function createCampaigns(page, amount) {
+  campaignCreator: async function createCampaigns(page, amount, browser) {
     console.log("");
-    console.log("======================================");
+    console.log("=======================================");
     console.log("   Upload de campanhas inicializado!   ");
-    console.log("======================================");
+    console.log("=======================================");
     console.log("");
     const campaigns = await GoogleSheetsController.getCampaings(amount);
     for (let i = 0; i < campaigns.length; i++) {
@@ -40,7 +40,18 @@ CreateCampaignController = {
       await page.select("#AudienceId", campaigns[i].audience);
       await page.waitFor(2000);
       await page.click("#btnTest");
-      await page.waitForSelector("#btnSave  ");
+      await page.waitFor(3000);
+      console.log(campaigns[i].test);
+      if (campaigns[i].test == 'Não') {
+        await page.waitFor(1000);
+        const pages = await browser.pages();
+        //console.log(pages);
+        const link = pages[pages.length - 1];
+        await page.waitFor(1000);
+        await link.close();
+        await page.waitFor(1000);
+      }
+      await page.waitForSelector("#btnSave");
       await page.waitFor(3000);
       await page.click("#btnSave");
       await page.waitFor(2000);
