@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const CreateCampaignController = require("./controllers/CreateCampaignController");
 const FacebookLoginController = require("./controllers/FacebookLoginController");
+//const CreateOnsiteController = require("./controllers/CreateOnsiteController");
 const readline = require("readline");
 
 var rl = readline.createInterface(process.stdin, process.stdout);
@@ -13,7 +14,7 @@ init();
 async function init() {
   console.log("");
   console.log("[1] - Campanhas Manuais Programadas");
-  console.log("[2] - Optins");
+  console.log("[2] - Onsite");
   console.log("[Exit] - Encerrar programa");
   console.log("");
 
@@ -54,7 +55,7 @@ async function init() {
 //const types = ["campanhas", "onsites", "bounces", "optins"]
 async function optionCheck(option, browser, page, amount) {
   if (option == "1") {
-    await CreateCampaignController.campaignCreator(page, amount, browser);
+    await CreateCampaignController.campaignCreator(page, amount);
   } else {
     console.log("Script ainda não disponível!");
     await browser.close();
@@ -66,4 +67,23 @@ async function optionCheck(option, browser, page, amount) {
   await page.waitFor(4000);
   //await browser.close();
   // process.exit();
+
+  //const types = ["campanhas", "onsites", "bounces", "optins"]
+  async function optionCheck(option, browser, page, amount) {
+    if (option == "2") {
+      await CreateOnsiteController.campaignCreator(page, amount);
+    } else {
+      console.log("Script ainda não disponível!");
+      await browser.close();
+    }
+    console.log("");
+    console.log("Upload concluído!");
+    console.log("");
+    await page.waitFor("#bt-menu");
+    await page.waitFor(4000);
+    //await browser.close();
+    // process.exit();
+
+  }
+
 }
