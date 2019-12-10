@@ -1,7 +1,8 @@
 const puppeteer = require("puppeteer");
 const CreateCampaignController = require("./controllers/CreateCampaignController");
 const FacebookLoginController = require("./controllers/FacebookLoginController");
-//const CreateOnsiteController = require("./controllers/CreateOnsiteController");
+const CreateOnsiteController = require("./controllers/CreateOnsiteController");
+const CreateBounceController = require("./controllers/CreateBounceController");
 const readline = require("readline");
 
 var rl = readline.createInterface(process.stdin, process.stdout);
@@ -15,6 +16,7 @@ async function init() {
   console.log("");
   console.log("[1] - Campanhas Manuais Programadas");
   console.log("[2] - Onsite");
+  console.log("[3] - Social Bounce");
   console.log("[Exit] - Encerrar programa");
   console.log("");
 
@@ -54,36 +56,28 @@ async function init() {
 
 //const types = ["campanhas", "onsites", "bounces", "optins"]
 async function optionCheck(option, browser, page, amount) {
-  if (option == "1") {
-    await CreateCampaignController.campaignCreator(page, amount);
-  } else {
-    console.log("Script ainda não disponível!");
-    await browser.close();
-  }
-  console.log("");
-  console.log("Upload concluído!");
-  console.log("");
-  await page.waitFor("#bt-menu");
-  await page.waitFor(4000);
-  //await browser.close();
-  // process.exit();
+  switch (option) {
 
-  //const types = ["campanhas", "onsites", "bounces", "optins"]
-  async function optionCheck(option, browser, page, amount) {
-    if (option == "2") {
-      await CreateOnsiteController.campaignCreator(page, amount);
-    } else {
-      console.log("Script ainda não disponível!");
-      await browser.close();
-    }
+    case "1":
+    await CreateCampaignController.campaignCreator(page, amount, browser);
+        break;
+
+    case "2":
+        await CreateOnsiteController.campaignCreator(page, amount, browser);
+        break;
+
+    case "3":
+        await CreateBounceController.campaignCreator(page, amount, browser);
+        break;
+
+
+        default:
+            console.log("Script ainda não disponível!");
+            await browser.close();
+    } 
     console.log("");
     console.log("Upload concluído!");
     console.log("");
     await page.waitFor("#bt-menu");
     await page.waitFor(4000);
-    //await browser.close();
-    // process.exit();
-
-  }
-
 }

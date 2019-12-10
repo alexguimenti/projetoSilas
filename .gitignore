@@ -1,3 +1,4 @@
 node_modules
 example.png
 /controllers/credentials.js
+/controllers/client_secret.js

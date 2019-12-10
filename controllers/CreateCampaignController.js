@@ -41,7 +41,6 @@ CreateCampaignController = {
       await page.waitFor(2000);
       await page.click("#btnTest");
       await page.waitFor(3000);
-      console.log(campaigns[i].test);
       if (campaigns[i].test == 'Não') {
         await page.waitFor(1000);
         const pages = await browser.pages();

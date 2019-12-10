@@ -6,7 +6,8 @@ GoogleSheetsController = {
   getCampaings: async function accessSpreadsheet(amount) {
     const campaigns = [];
     const doc = new GoogleSpreadSheet(
-      "1qFJzC_RkAjwMLu2xFMmZORFAoFW0AtHByDlSkbrJ1X4"
+      "1DmbLfSAEIpgEEGC3ZlLiC_gboq1NJJASqLV98tLU1Eg"
+      //"1qFJzC_RkAjwMLu2xFMmZORFAoFW0AtHByDlSkbrJ1X4"
     );
     await promisify(doc.useServiceAccountAuth)(creds);
     const info = await promisify(doc.getInfo)();
