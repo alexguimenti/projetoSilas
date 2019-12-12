@@ -39,6 +39,9 @@ CreateCampaignController = {
       await page.click("#AudienceId");
       await page.select("#AudienceId", campaigns[i].audience);
       await page.waitFor(2000);
+      await page.click("#parameterSelector");
+      await page.select("#parameterSelector", campaigns[i].parameter);
+      await page.waitFor(2000);
       await page.click("#btnTest");
       await page.waitFor(3000);
       if (campaigns[i].test == 'Não') {

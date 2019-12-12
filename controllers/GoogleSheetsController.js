@@ -15,10 +15,12 @@ GoogleSheetsController = {
     const cells = await promisify(campaingsSheet.getCells)({
       "min-row": 2,
       "max-row": 2 + (amount - 1),
-      "min-col": 15,
-      "max-col": 15
+      "min-col": 16,
+      "max-col": 16
     });
     for (const cell of cells) {
+      //console.log(cell)
+      //console.log(cell.value)
       let campaign = JSON.parse(cell.value);
       campaigns.push(campaign);
     }
